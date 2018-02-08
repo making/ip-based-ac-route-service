@@ -36,7 +36,7 @@ public class RouteServiceController {
 
     @RequestMapping(path = "{target}", headers = {FORWARDED_URL, PROXY_METADATA, PROXY_SIGNATURE})
     ResponseEntity<?> service(@PathVariable String target, RequestEntity<byte[]> incoming, @Value("#{request.remoteAddr}") String remoteAddr) {
-        this.logger.info(">> {}: Incoming Request: {}", target, incoming);
+        this.logger.debug(">> {}: Incoming Request: {}", target, incoming);
 
         String clientIp = xForwardedFor(incoming.getHeaders()).orElse(remoteAddr);
         if (!this.accessControl.isAllowed(target, clientIp)) {
@@ -46,7 +46,7 @@ public class RouteServiceController {
         }
 
         RequestEntity<?> outgoing = getOutgoingRequest(incoming);
-        this.logger.info("<< {}: Outgoing Request: {}", target, outgoing);
+        this.logger.debug("<< {}: Outgoing Request: {}", target, outgoing);
         return this.restOperations.exchange(outgoing, byte[].class);
     }
 
