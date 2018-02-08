@@ -40,6 +40,6 @@ $ curl your-app.${APP_DOMAIN}
 $ curl -XPUT -H "Content-Type: application/json" ip-based-ac-route-service.${APP_DOMAIN}/acl/${TARGET} -d '["192.168.10.0/24","192.168.20.0/24", "192.169.54.50/32"]' 
 ["192.168.10.0/24","192.168.20.0/24","192.169.54.50/32"]
 
-$ curl demo.202-241-169-198.sslip.io 
+$ curl your-app.${APP_DOMAIN}
 Hello World! 
 ```
